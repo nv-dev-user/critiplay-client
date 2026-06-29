@@ -14,12 +14,14 @@
     "@iconify-json/lucide": "^1.2.114",
     "@iconify-json/simple-icons": "^1.2.87",
     "@nuxt/ui": "^4.9.0",
+    "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "nuxt": "^4.4.8",
     "tailwindcss": "^4.3.1"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",
+    "@tiptap/y-tiptap": "^3.0.5",
     "eslint": "^10.6.0",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.5"
