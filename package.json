@@ -4,20 +4,24 @@
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
-    "preview": "nuxt preview",
+    "dev": "vc dev --listen 3032",
+    "preview": "vc deploy",
+    "deploy": "vc deploy --prod",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
-    "@iconify-json/lucide": "^1.2.114",
+    "@iconify-json/lucide": "^1.2.115",
     "@iconify-json/simple-icons": "^1.2.87",
     "@nuxt/ui": "^4.9.0",
+    "@nuxtjs/device": "^4.0.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
-    "tailwindcss": "^4.3.1"
+    "tailwindcss": "^4.3.1",
+    "ufo": "^1.6.4"
   },
   "devDependencies": {
     "@nuxt/eslint": "^1.16.0",

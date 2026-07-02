@@ -1,4 +1,6 @@
-<script setup>
+<script setup lang="ts">
+import type { NavigationMenuItem } from '@nuxt/ui'
+
 useHead({
   meta: [
     { name: 'viewport', content: 'width=device-width, initial-scale=1' }
@@ -11,67 +13,90 @@ useHead({
   }
 })
 
-const title = 'Nuxt Starter Template'
-const description = 'A production-ready starter template powered by Nuxt UI. Build beautiful, accessible, and performant applications in minutes, not hours.'
+const title = ''
+const description = ''
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
   ogDescription: description,
-  ogImage: 'https://ui.nuxt.com/assets/templates/nuxt/starter-light.png',
-  twitterCard: 'summary_large_image'
 })
+
+// ---
+const { isDesktop } = useDevice()
+
+const isOpen: Ref<boolean> = ref(false)
+
+const items = computed<NavigationMenuItem[]>(() => [
+  {
+    label: 'Browse',
+    to: '/',
+    class: "text-lg mx-2",
+  },
+  {
+    label: 'Login',
+    to: '/auth/login',
+    class: "text-lg mx-2",
+  },
+  {
+    label: 'Signup',
+    to: '/auth/signup',
+    class: "text-lg mx-2",
+  }
+])
 </script>
 
 <template>
   <UApp>
-    <UHeader>
-      <template #left>
-        <NuxtLink to="/">
-          <AppLogo class="w-auto h-6 shrink-0" />
-        </NuxtLink>
+    <UHeader mode="slideover" class="h-14" v-model:open="isOpen">
+      <template #toggle="{ open, toggle, ui }" v-if="!isDesktop">
+        <UButton @click="toggle" variant="subtle" :class="['mr-2']">
+          <BurgerMenu :open="open" />
+        </UButton>
+      </template>
 
-        <TemplateMenu />
+      <template #title>
+        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+      </template>
+
+      <template #left>
+        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+        <UNavigationMenu
+          v-if="isDesktop"
+          :items="items"
+          highlight
+        />
       </template>
 
       <template #right>
         <UColorModeButton />
-
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
       </template>
+
+      <template #content>
+        <div data-slot="header" class="flex items-center justify-between h-14 px-6 border-b border-default">
+          <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+          <UButton
+            icon="i-lucide-x"
+            color="primary"
+            variant="subtle"
+            class="px-2"
+            @click="() => { isOpen = false }"
+          />
+        </div>
+        <div class="p-4">
+          <UNavigationMenu :items="items" type="single" orientation="vertical" />
+        </div>
+      </template>
+
     </UHeader>
 
     <UMain>
       <NuxtPage />
     </UMain>
 
-    <USeparator icon="i-simple-icons-nuxtdotjs" />
-
     <UFooter>
-      <template #left>
-        <p class="text-sm text-muted">
-          Built with Nuxt UI • © {{ new Date().getFullYear() }}
-        </p>
-      </template>
 
-      <template #right>
-        <UButton
-          to="https://github.com/nuxt-ui-templates/starter"
-          target="_blank"
-          icon="i-simple-icons-github"
-          aria-label="GitHub"
-          color="neutral"
-          variant="ghost"
-        />
-      </template>
     </UFooter>
   </UApp>
 </template>

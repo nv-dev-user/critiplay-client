@@ -1,8 +1,18 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  ssr: true,
+
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: ''
+    }
+  },
+
   modules: [
     '@nuxt/eslint',
-    '@nuxt/ui'
+    '@nuxt/ui',
+    '@vercel/analytics',
+    '@nuxtjs/device'
   ],
 
   devtools: {
