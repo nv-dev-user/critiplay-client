@@ -3,7 +3,6 @@ import { getRequestHeaders } from 'h3'
 
 // Proxy to fetch from api.critiplay
 export default defineEventHandler(async (event) => {
-
   const authCookie = getCookie(event, 'access_token')
 
   const proxyUrl = useRuntimeConfig().public.apiBaseUrl

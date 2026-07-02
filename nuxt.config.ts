@@ -1,12 +1,5 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  ssr: true,
-
-  runtimeConfig: {
-    public: {
-      apiBaseUrl: ''
-    }
-  },
 
   modules: [
     '@nuxt/eslint',
@@ -14,12 +7,19 @@ export default defineNuxtConfig({
     '@vercel/analytics',
     '@nuxtjs/device'
   ],
+  ssr: true,
 
   devtools: {
     enabled: true
   },
 
   css: ['~/assets/css/main.css'],
+
+  runtimeConfig: {
+    public: {
+      apiBaseUrl: ''
+    }
+  },
 
   routeRules: {
     '/': { prerender: true }

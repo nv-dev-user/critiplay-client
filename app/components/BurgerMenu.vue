@@ -2,7 +2,7 @@
 import { motion } from 'motion-v'
 import type { VariantType } from 'motion-v'
 
-const props = defineProps<{
+defineProps<{
   open: boolean
 }>()
 

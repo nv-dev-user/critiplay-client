@@ -20,7 +20,7 @@ useSeoMeta({
   title,
   description,
   ogTitle: title,
-  ogDescription: description,
+  ogDescription: description
 })
 
 // ---
@@ -32,36 +32,53 @@ const items = computed<NavigationMenuItem[]>(() => [
   {
     label: 'Browse',
     to: '/',
-    class: "text-lg mx-2",
+    class: 'text-lg mx-2'
   },
   {
     label: 'Login',
     to: '/auth/login',
-    class: "text-lg mx-2",
+    class: 'text-lg mx-2'
   },
   {
     label: 'Signup',
     to: '/auth/signup',
-    class: "text-lg mx-2",
+    class: 'text-lg mx-2'
   }
 ])
 </script>
 
 <template>
   <UApp>
-    <UHeader mode="slideover" class="h-14" v-model:open="isOpen">
-      <template #toggle="{ open, toggle, ui }" v-if="!isDesktop">
-        <UButton @click="toggle" variant="subtle" :class="['mr-2']">
+    <UHeader
+      v-model:open="isOpen"
+      mode="slideover"
+      class="h-14"
+    >
+      <template
+        v-if="!isDesktop"
+        #toggle="{ open, toggle }"
+      >
+        <UButton
+          variant="subtle"
+          :class="['mr-2']"
+          @click="toggle"
+        >
           <BurgerMenu :open="open" />
         </UButton>
       </template>
 
       <template #title>
-        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+        <NuxtLink
+          class="text-2xl font-bold"
+          to="/"
+        >Critiplay</NuxtLink>
       </template>
 
       <template #left>
-        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+        <NuxtLink
+          class="text-2xl font-bold"
+          to="/"
+        >Critiplay</NuxtLink>
         <UNavigationMenu
           v-if="isDesktop"
           :items="items"
@@ -74,8 +91,14 @@ const items = computed<NavigationMenuItem[]>(() => [
       </template>
 
       <template #content>
-        <div data-slot="header" class="flex items-center justify-between h-14 px-6 border-b border-default">
-          <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+        <div
+          data-slot="header"
+          class="flex items-center justify-between h-14 px-6 border-b border-default"
+        >
+          <NuxtLink
+            class="text-2xl font-bold"
+            to="/"
+          >Critiplay</NuxtLink>
           <UButton
             icon="i-lucide-x"
             color="primary"
@@ -85,18 +108,19 @@ const items = computed<NavigationMenuItem[]>(() => [
           />
         </div>
         <div class="p-4">
-          <UNavigationMenu :items="items" type="single" orientation="vertical" />
+          <UNavigationMenu
+            :items="items"
+            type="single"
+            orientation="vertical"
+          />
         </div>
       </template>
-
     </UHeader>
 
     <UMain>
       <NuxtPage />
     </UMain>
 
-    <UFooter>
-
-    </UFooter>
+    <UFooter />
   </UApp>
 </template>

@@ -9,18 +9,18 @@ export default defineNuxtPlugin(() => {
 
   const customFetch = (async (request: any, options: any = {}) => {
     try {
-      return await fetch(request, options);
+      return await fetch(request, options)
     } catch (err: any) {
-      const is401 = err?.response?.status === 401;
-      if (!is401 || String(request).includes('/auth/refresh')) throw err;
-      if ((options as any)._retried) throw err;
+      const is401 = err?.response?.status === 401
+      if (!is401 || String(request).includes('/auth/refresh')) throw err
+      if ((options as any)._retried) throw err
 
       try {
-        await refreshOnce();
-        return await fetch(request, { ...options, _retried: true });
+        await refreshOnce()
+        return await fetch(request, { ...options, _retried: true })
       } catch {
         await navigateTo('/auth/login')
-        throw err;
+        throw err
       }
     }
   }) as typeof fetch
