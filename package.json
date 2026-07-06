@@ -9,6 +9,9 @@
     "deploy": "vc deploy --prod",
     "postinstall": "nuxt prepare",
     "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "typecheck": "nuxt typecheck"
   },
   "dependencies": {
@@ -27,6 +30,7 @@
     "@nuxt/eslint": "^1.16.0",
     "@tiptap/y-tiptap": "^3.0.5",
     "eslint": "^10.6.0",
+    "prettier": "^3.9.4",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.5"
   },

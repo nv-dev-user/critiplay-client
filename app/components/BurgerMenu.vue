@@ -6,7 +6,9 @@ defineProps<{
   open: boolean
 }>()
 
-const variants: { [k: string]: VariantType | ((custom: unknown) => VariantType) } = {
+const variants: {
+  [k: string]: VariantType | ((custom: unknown) => VariantType)
+} = {
   normal: {
     rotate: 0,
     y: 0,

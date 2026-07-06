@@ -2,13 +2,18 @@ import type { User } from '~/types/user'
 
 export const useAuth = () => {
   const user = useState<User | null>('auth-user', () => null)
-  const refreshing = useState<Promise<void> | null>('auth-refreshing', () => null)
+  const refreshing = useState<Promise<void> | null>(
+    'auth-refreshing',
+    () => null
+  )
 
   const refreshOnce = () => {
     if (!refreshing.value) {
       refreshing.value = $fetch('/api/auth/refresh', { method: 'POST' })
         .then(() => {})
-        .finally(() => { refreshing.value = null })
+        .finally(() => {
+          refreshing.value = null
+        })
     }
 
     return refreshing.value
