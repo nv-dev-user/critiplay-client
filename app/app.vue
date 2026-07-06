@@ -1,123 +1,109 @@
 <script setup lang="ts">
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { NavigationMenuItem } from "@nuxt/ui";
 
 useHead({
-  meta: [{ name: 'viewport', content: 'width=device-width, initial-scale=1' }],
-  link: [{ rel: 'icon', href: '/favicon.ico' }],
+  meta: [{ name: "viewport", content: "width=device-width, initial-scale=1" }],
+  link: [{ rel: "icon", href: "/favicon.ico" }],
   htmlAttrs: {
-    lang: 'en'
-  }
-})
+    lang: "en",
+  },
+});
 
-const title = 'Critiplay'
-const description
-  = 'Critiplay is a platform for testing and reviewing games. Discover new games, share your feedbacks, and connect with other gamers.'
+const title = "Critiplay";
+const description =
+  "Critiplay is a platform for testing and reviewing games. Discover new games, share your feedbacks, and connect with other gamers.";
 
 useSeoMeta({
   title,
   description,
   ogTitle: title,
-  ogDescription: description
-})
+  ogDescription: description,
+});
 
 // ---
-const { isDesktop } = useDevice()
-const router = useRouter()
-const toast = useToast()
+const { isDesktop } = useDevice();
+const router = useRouter();
+const toast = useToast();
 
-const isOpen: Ref<boolean> = ref(false)
+const isOpen: Ref<boolean> = ref(false);
 const items = ref([
   {
-    label: 'Browse',
-    to: '/',
-    class: 'text-lg mx-2'
+    label: "Browse",
+    to: "/",
+    class: "text-lg mx-2",
   },
   {
-    label: 'Dashboard',
-    to: '/user/dashboard',
-    class: 'text-lg mx-2'
+    label: "Dashboard",
+    to: "/user/dashboard",
+    class: "text-lg mx-2",
   },
   {
-    label: 'Login',
-    to: '/auth/login',
-    class: 'text-lg mx-2'
+    label: "Login",
+    to: "/auth/login",
+    class: "text-lg mx-2",
   },
   {
-    label: 'Signup',
-    to: '/auth/signup',
-    class: 'text-lg mx-2'
+    label: "Signup",
+    to: "/auth/signup",
+    class: "text-lg mx-2",
   },
   {
-    label: 'Logout',
+    label: "Logout",
     onSelect: async () => {
       try {
-        await useAuth().logout()
+        await useAuth().logout();
       } catch {
         toast.add({
-          title: 'An error occurred while logging out.',
-          icon: 'i-lucide-circle-x',
-          color: 'error'
-        })
+          title: "An error occurred while logging out.",
+          icon: "i-lucide-circle-x",
+          color: "error",
+        });
       } finally {
-        router.push('/')
-        isOpen.value = false
+        router.push("/");
+        isOpen.value = false;
       }
     },
-    class: 'text-lg mx-2 hover:bg-red-700/50 rounded-sm cursor-pointer'
-  }
-])
+    class: "text-lg mx-2 hover:bg-red-700/50 rounded-sm cursor-pointer",
+  },
+]);
 
 const filteredItems = computed(() => {
-  const { user } = useAuth()
-  const filteredItems: NavigationMenuItem[] = []
+  const { user } = useAuth();
+  const filteredItems: NavigationMenuItem[] = [];
   if (user.value) {
     filteredItems.push(
       ...items.value.filter(
-        item => item.label !== 'Login' && item.label !== 'Signup'
-      )
-    )
+        (item) => item.label !== "Login" && item.label !== "Signup",
+      ),
+    );
   } else {
     filteredItems.push(
       ...items.value.filter(
-        item => item.label !== 'Logout' && item.label !== 'Dashboard'
-      )
-    )
+        (item) => item.label !== "Logout" && item.label !== "Dashboard",
+      ),
+    );
   }
 
-  return filteredItems
-})
+  return filteredItems;
+});
 </script>
 
 <template>
   <UApp>
-    <UHeader
-      v-model:open="isOpen"
-      mode="slideover">
-      <template
-        v-if="!isDesktop"
-        #toggle="{ open, toggle }">
-        <UButton
-          variant="subtle"
-          :class="['mr-2']"
-          @click="toggle">
+    <UHeader v-model:open="isOpen" mode="slideover">
+      <template v-if="!isDesktop" #toggle="{ open, toggle }">
+        <UButton variant="subtle" :class="['mr-2']" @click="toggle">
           <BurgerMenu :open="open" />
         </UButton>
       </template>
 
       <template #title>
-        <NuxtLink
-          class="text-2xl font-bold"
-          to="/">Critiplay</NuxtLink>
+        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
       </template>
 
       <template #left>
-        <NuxtLink
-          class="text-2xl font-bold"
-          to="/">Critiplay</NuxtLink>
-        <UNavigationMenu
-          v-if="isDesktop"
-          :items="filteredItems"
-          highlight />
+        <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
+        <UNavigationMenu v-if="isDesktop" :items="filteredItems" highlight />
       </template>
 
       <template #right>
@@ -129,9 +115,7 @@ const filteredItems = computed(() => {
           data-slot="header"
           class="flex items-center justify-between h-14 px-6 border-b border-default"
         >
-          <NuxtLink
-            class="text-2xl font-bold"
-            to="/">Critiplay</NuxtLink>
+          <NuxtLink class="text-2xl font-bold" to="/">Critiplay</NuxtLink>
           <UButton
             icon="i-lucide-x"
             color="primary"

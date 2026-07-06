@@ -1,32 +1,38 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ['@nuxt/eslint', '@nuxt/ui', '@vercel/analytics', '@nuxtjs/device', '@nuxt/icon'],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@vercel/analytics",
+    "@nuxtjs/device",
+    "@nuxt/icon",
+  ],
   ssr: true,
 
   devtools: {
-    enabled: true
+    enabled: true,
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   runtimeConfig: {
     public: {
-      apiBaseUrl: ''
-    }
+      apiBaseUrl: "",
+    },
   },
 
   routeRules: {
-    '/': { prerender: true }
+    "/": { prerender: true },
   },
 
-  compatibilityDate: '2025-01-15',
+  compatibilityDate: "2025-01-15",
 
   eslint: {
     config: {
       stylistic: {
-        commaDangle: 'never',
-        braceStyle: '1tbs'
-      }
-    }
-  }
-})
+        commaDangle: "never",
+        braceStyle: "1tbs",
+      },
+    },
+  },
+});

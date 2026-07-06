@@ -1,33 +1,33 @@
 <script setup lang="ts">
-import { motion } from 'motion-v'
-import type { VariantType } from 'motion-v'
+import { motion } from "motion-v";
+import type { VariantType } from "motion-v";
 
 defineProps<{
-  open: boolean
-}>()
+  open: boolean;
+}>();
 
 const variants: {
-  [k: string]: VariantType | ((custom: unknown) => VariantType)
+  [k: string]: VariantType | ((custom: unknown) => VariantType);
 } = {
   normal: {
     rotate: 0,
     y: 0,
-    opacity: 1
+    opacity: 1,
   },
   close: (custom: unknown) => {
-    const c = custom as number
+    const c = custom as number;
     return {
       rotate: c === 1 ? 45 : c === 3 ? -45 : 0,
       y: c === 1 ? 6 : c === 3 ? -6 : 0,
       opacity: c === 2 ? 0 : 1,
       transition: {
-        type: 'spring',
+        type: "spring",
         stiffness: 260,
-        damping: 20
-      }
-    }
-  }
-}
+        damping: 20,
+      },
+    };
+  },
+};
 </script>
 
 <template>
