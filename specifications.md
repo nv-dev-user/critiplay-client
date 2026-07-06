@@ -3,9 +3,11 @@
 ## Technical Stack
 
 ### Backend
+
 [CritiPlay API](https://api.critiplay.com) is a REST API built with [Hono](https://hono.dev/) and [Supabase](https://supabase.com/).
 
 ### Database
+
 The project uses [Supabase](https://supabase.com/database) as a database solution, which is built on top of PostgreSQL. It provides a scalable and reliable database for storing and managing data. It offers features like authentication, real-time subscriptions, and serverless functions.
 
 ### File Storage
@@ -19,10 +21,13 @@ The frontend, [CritiPlay Client](https://www.critiplay.com), is hosted on [Verce
 ## Functionalities
 
 ### Projects / Games
+
 - TODO: Write all I want as functionalities for project management.
 
 ### Tests / Feedback
+
 - TODO: Write all I want as functionalities for testing and feedback.
 
 ### Marketplace & Monetization
+
 - TODO: Write all I want as functionalities for marketplace and monetization.
