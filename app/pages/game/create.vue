@@ -1,15 +1,15 @@
 <script setup lang="ts">
-const { isDesktop } = useDevice();
-const { user } = useAuth();
-const router = useRouter();
+const { isDesktop } = useDevice()
+const { user } = useAuth()
+const router = useRouter()
 
-const isOpen: Ref<boolean> = ref(!isDesktop);
-const isLoading: Ref<boolean> = ref(true);
+const isOpen: Ref<boolean> = ref(!isDesktop)
+const isLoading: Ref<boolean> = ref(true)
 
 if (!user.value) {
-  router.push("/auth/login");
+  router.push('/auth/login')
 } else {
-  isLoading.value = false;
+  isLoading.value = false
 }
 </script>
 
@@ -33,7 +33,7 @@ if (!user.value) {
             variant="subtle"
             @click="
               () => {
-                isOpen = false;
+                isOpen = false
               }
             "
           >

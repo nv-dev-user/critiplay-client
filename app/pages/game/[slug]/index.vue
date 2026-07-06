@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const { isDesktop } = useDevice();
+const { isDesktop } = useDevice()
 </script>
 
 <template>
   <div
     :class="[
       'bg-gray-800 rounded text-center p-4',
-      { 'bg-gray-100': !isDesktop },
+      { 'bg-gray-100': !isDesktop }
     ]"
   >
     <h2 class="text-3xl font-bold">Title</h2>

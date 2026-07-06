@@ -1,9 +1,9 @@
 <script setup lang="ts">
-const { user } = useAuth();
-const router = useRouter();
+const { user } = useAuth()
+const router = useRouter()
 
 if (!user.value) {
-  router.push("/auth/login");
+  router.push('/auth/login')
 }
 </script>
 
