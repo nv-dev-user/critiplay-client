@@ -23,6 +23,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
+    "prettier": "^3.9.4",
     "tailwindcss": "^4.3.1",
     "ufo": "^1.6.4"
   },
@@ -30,7 +31,6 @@
     "@nuxt/eslint": "^1.16.0",
     "@tiptap/y-tiptap": "^3.0.5",
     "eslint": "^10.6.0",
-    "prettier": "^3.9.4",
     "typescript": "^6.0.3",
     "vue-tsc": "^3.3.5"
   },
