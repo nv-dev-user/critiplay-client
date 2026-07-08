@@ -118,7 +118,7 @@ CritiPlay s'adresse à trois profils principaux, chacun avec un usage et des att
 
 - Le testeur peut :
   - écrire un nouveau retour de test.
-  - choisir les tags, le type, la catégorie, le niveau et les détails de son retour de test.
+  - choisir les tags, le type, la catégorie, la sévérité, le niveau, la version, la plateforme et les détails de son retour de test.
   - upvoter un retour existant.
 - Le testeur ne doit pas :
   - pouvoir modifier son retour de test une fois envoyé.

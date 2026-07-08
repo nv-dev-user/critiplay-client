@@ -6,5 +6,8 @@
   },
 
   "html.suggest.html5": true,
-  "vue.inlayHints.missingProps": false
+
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
 }

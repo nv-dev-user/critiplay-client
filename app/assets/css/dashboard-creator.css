@@ -1,0 +1,28 @@
+@layer components {
+  .icon-projects {
+    @apply text-violet-400;
+  }
+
+  .icon-feedback {
+    @apply text-rose-400;
+  }
+
+  .icon-downloads {
+    @apply text-lime-400;
+  }
+
+  .icon-testers {
+    @apply text-blue-400;
+  }
+
+  .project {
+    @apply relative flex flex-col gap-2
+                min-h-24
+                border border-transparent
+                p-2;
+  }
+
+  .metric-card {
+    @apply relative h-full flex flex-col items-center md:flex-row gap-0 md:gap-4 justify-center md:justify-start;
+  }
+}

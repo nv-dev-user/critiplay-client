@@ -24,7 +24,9 @@ useSeoMeta({
 const { isDesktop } = useDevice()
 const router = useRouter()
 const toast = useToast()
+const { user } = useAuth()
 
+const filteredItems: Ref<NavigationMenuItem[]> = ref([])
 const isOpen: Ref<boolean> = ref(false)
 const items = ref([
   {
@@ -67,24 +69,22 @@ const items = ref([
   }
 ])
 
-const filteredItems = computed(() => {
-  const { user } = useAuth()
-  const filteredItems: NavigationMenuItem[] = []
+//! Bug : The filteredItems array is not reactive to changes in the user state.
+//! If the user logs in or out, the navigation menu does not update accordingly.
+onMounted(() => {
   if (user.value) {
-    filteredItems.push(
+    filteredItems.value.push(
       ...items.value.filter(
         (item) => item.label !== 'Login' && item.label !== 'Signup'
       )
     )
   } else {
-    filteredItems.push(
+    filteredItems.value.push(
       ...items.value.filter(
         (item) => item.label !== 'Logout' && item.label !== 'Dashboard'
       )
     )
   }
-
-  return filteredItems
 })
 </script>
 

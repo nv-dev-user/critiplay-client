@@ -1,6 +1,43 @@
 <script setup lang="ts">
+definePageMeta({
+  ssr: false
+})
+
 const { user } = useAuth()
 const router = useRouter()
+const { isDesktop } = useDevice()
+
+//! Dummy data
+const projects = ref([
+  {
+    id: '1',
+    title: 'Rogue Quest',
+    status: 'Alpha',
+    version: 'v0.8.1',
+    focused: true
+  },
+  {
+    id: '2',
+    title: 'Pixel Odyssey',
+    status: 'Alpha',
+    version: 'v0.8.1',
+    focused: false
+  }
+])
+
+//! Dummy data
+const feedback = ref([
+  { content: 'blablabla', projectId: '1' },
+  { content: 'blablabla', projectId: '1' },
+  { content: 'blablabla', projectId: '1' },
+  { content: 'blablabla', projectId: '2' },
+  { content: 'blablabla', projectId: '2' }
+])
+
+const currentProject = computed(() => projects.value.find((p) => p.focused))
+const currentFeedbackList = computed(() =>
+  feedback.value.filter((f) => f.projectId === currentProject.value?.id)
+)
 
 if (!user.value) {
   router.push('/auth/login')
@@ -8,5 +45,32 @@ if (!user.value) {
 </script>
 
 <template>
-  <div class="w-full grid grid-cols-12 gap-4">TODO</div>
+  <div>
+    <div v-if="!isDesktop">
+      <div class="h-80">
+        <DashboardCreatorProjects
+          v-model:projects="projects"
+          v-model:feedback="currentFeedbackList.length"
+        />
+      </div>
+    </div>
+
+    <div v-else>
+      <div>
+        <DashboardCreatorMetrics
+          :projects-nb="projects.length"
+          :feedback-nb="currentFeedbackList.length"
+          :downloads-nb="68"
+          :testers-nb="23"
+        />
+      </div>
+
+      <div class="grid grid-cols-12 gap-2 mt-4 mx-4 h-80">
+        <DashboardCreatorProjects
+          v-model:projects="projects"
+          v-model:feedback="currentFeedbackList.length"
+        />
+      </div>
+    </div>
+  </div>
 </template>
