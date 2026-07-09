@@ -15,14 +15,23 @@
     @apply text-blue-400;
   }
 
+  .icon-container {
+    @apply relative flex items-center justify-center
+            rounded-lg
+            w-full md:max-w-16 max-h-16 min-w-12 min-h-12
+            md:mx-0 p-2 md:ml-4;
+  }
+
   .project {
     @apply relative flex flex-col gap-2
-                min-h-24
-                border border-transparent
-                p-2;
+            min-h-24
+            border border-transparent
+            p-2;
   }
 
   .metric-card {
-    @apply relative h-full flex flex-col items-center md:flex-row gap-0 md:gap-4 justify-center md:justify-start;
+    @apply relative flex flex-col items-center md:flex-row gap-0 md:gap-4 justify-center md:justify-start
+            px-2 md:px-0
+            h-full;
   }
 }

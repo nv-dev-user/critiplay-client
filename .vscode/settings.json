@@ -1,4 +1,6 @@
 {
+  "better-comments.fullHighlight": true,
+  "better-comments.strict": false,
   "editor.quickSuggestions": {
     "strings": true,
     "other": true,

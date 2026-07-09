@@ -1,10 +1,9 @@
 <script setup lang="ts">
 definePageMeta({
-  ssr: false
+  ssr: false,
+  middleware: 'auth'
 })
 
-const { user } = useAuth()
-const router = useRouter()
 const { isDesktop } = useDevice()
 
 //! Dummy data
@@ -20,7 +19,7 @@ const projects = ref([
     id: '2',
     title: 'Pixel Odyssey',
     status: 'Alpha',
-    version: 'v0.8.1',
+    version: 'v0.2.4',
     focused: false
   }
 ])
@@ -34,43 +33,49 @@ const feedback = ref([
   { content: 'blablabla', projectId: '2' }
 ])
 
+//! Dummy data
+const downloads = ref([
+  { projectId: '1', count: 68 },
+  { projectId: '2', count: 24 }
+])
+
+//! Dummy data
+const testers = ref([
+  { projectId: '1', count: 23 },
+  { projectId: '2', count: 9 }
+])
+
 const currentProject = computed(() => projects.value.find((p) => p.focused))
 const currentFeedbackList = computed(() =>
   feedback.value.filter((f) => f.projectId === currentProject.value?.id)
 )
-
-if (!user.value) {
-  router.push('/auth/login')
-}
 </script>
 
 <template>
   <div>
+    <!-- Mobile View -->
     <div v-if="!isDesktop">
-      <div class="h-80">
-        <DashboardCreatorProjects
-          v-model:projects="projects"
-          v-model:feedback="currentFeedbackList.length"
-        />
-      </div>
+      <DashboardCreatorMetrics
+        :projects-nb="projects.length"
+        :feedback-nb="currentFeedbackList.length"
+        :downloads-nb="
+          downloads.find((d) => d.projectId === currentProject?.id)?.count || 0
+        "
+        :testers-nb="
+          testers.find((t) => t.projectId === currentProject?.id)?.count || 0
+        "
+      />
     </div>
 
-    <div v-else>
-      <div>
-        <DashboardCreatorMetrics
-          :projects-nb="projects.length"
-          :feedback-nb="currentFeedbackList.length"
-          :downloads-nb="68"
-          :testers-nb="23"
-        />
-      </div>
+    <div class="mt-4 glass-card p-2 mx-4">
+      <DashboardCreatorProjects
+        v-model:projects="projects"
+        :feedback="feedback"
+      />
+    </div>
 
-      <div class="grid grid-cols-12 gap-2 mt-4 mx-4 h-80">
-        <DashboardCreatorProjects
-          v-model:projects="projects"
-          v-model:feedback="currentFeedbackList.length"
-        />
-      </div>
+    <div class="mt-8 glass-card p-2 mx-4">
+      <DashboardCreatorProjectInfo :project="currentProject" />
     </div>
   </div>
 </template>
