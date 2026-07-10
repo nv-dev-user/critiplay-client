@@ -15,16 +15,24 @@
     @apply text-blue-400;
   }
 
-  .icon-container {
+  .icon-metric-container {
     @apply relative flex items-center justify-center
             rounded-lg
             w-full md:max-w-16 max-h-16 min-w-12 min-h-12
             md:mx-0 p-2 md:ml-4;
   }
 
+  .icon-platform-container {
+    @apply relative flex items-center justify-center
+            rounded-lg
+            bg-primary
+            max-w-14 max-h-14 w-14 h-14
+            p-2;
+  }
+
   .project {
-    @apply relative flex flex-col gap-2
-            min-h-24
+    @apply relative flex flex-col gap-2 justify-center items-center
+            min-h-16
             border border-transparent
             p-2;
   }

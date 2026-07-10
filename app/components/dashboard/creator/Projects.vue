@@ -1,19 +1,13 @@
 <script lang="ts" setup>
-import type { Project } from '@/types'
+import type { Feedback, Game } from '@/types'
 
-const projects = defineModel<Project[]>('projects', { default: () => [] })
+const games = defineModel<Game[]>('games', { default: () => [] })
 const props = defineProps<{
-  //! To change
-  feedback: {
-    content: string
-    projectId: string
-  }[]
+  feedback: Feedback[]
 }>()
 
-const { isDesktop } = useDevice()
-
 const changeCurrentProjectMobile = (selectedIndex: number) => {
-  const selectedProject = projects.value[selectedIndex]
+  const selectedProject = games.value[selectedIndex]
   if (!selectedProject) {
     return
   }
@@ -22,11 +16,11 @@ const changeCurrentProjectMobile = (selectedIndex: number) => {
 }
 
 const changeCurrentProject = (projectId: string) => {
-  if (projects.value.find((p) => p.id === projectId)?.focused) {
+  if (games.value.find((p) => p.id === projectId)?.focused) {
     return
   }
 
-  projects.value = projects.value.map((p) => ({
+  games.value = games.value.map((p) => ({
     ...p,
     focused: p.id === projectId
   }))
@@ -36,70 +30,56 @@ const changeCurrentProject = (projectId: string) => {
 <template>
   <div>
     <!-- Mobile View -->
-    <div v-if="!isDesktop">
+    <div class="md:hidden">
       <UCarousel
         v-slot="{ item }"
         dots
-        :items="projects"
+        arrows
+        prev-icon="i-lucide-chevron-left"
+        next-icon="i-lucide-chevron-right"
+        :items="games"
         :ui="{
           dot: 'data-[state=active]:bg-purple-700 border ligth:border-gray-950 dark:border-gray-50'
         }"
         @select="(selectedIndex) => changeCurrentProjectMobile(selectedIndex)"
       >
         <div class="project cursor-pointer">
-          <div class="flex items-center gap-2">
-            <div class="rounded-full w-2 h-2 bg-green-700"></div>
-            <div class="text-xl font-bold">{{ item.title }}</div>
+          <div class="flex items-center gap-4">
+            <div class="rounded-full w-4 h-4 bg-green-700 mt-1"></div>
+            <div class="text-3xl font-bold">{{ split(item.title, 12) }}</div>
           </div>
-          <div class="text-sm">
-            <span class="bg-primary text-gray-50 rounded p-1">{{
-              item.status
-            }}</span>
-            {{ item.version }}
-          </div>
-          <div class="text-secondary flex items-center gap-2">
-            <UIcon
-              name="i-teenyicons-message-text-alt-outline"
-              class="mt-1 icon-feedback size-5"
-            />
-            {{
-              props.feedback.filter((f) => f.projectId === item.id).length
-            }}
-            Feedback
-          </div>
+          <div class="text-sm text-secondary">par {{ item.by.username }}</div>
         </div>
       </UCarousel>
     </div>
 
     <!-- Desktop View -->
-    <div v-else :class="['flex flex-col gap-2']">
+    <div class="hidden md:flex flex-col gap-2">
       <div
-        v-for="project in projects"
-        :key="project.id"
+        v-for="game in games"
+        :key="game.id"
         :class="[
           'project cursor-pointer',
-          project.focused ? 'glass-card-purple' : ''
+          game.focused ? 'glass-card-purple' : ''
         ]"
-        @click="changeCurrentProject(project.id)"
+        @click="changeCurrentProject(game.id)"
       >
         <div class="flex items-center gap-2">
           <div class="rounded-full w-2 h-2 bg-green-700"></div>
-          <div class="text-xl font-bold">{{ project.title }}</div>
+          <div class="text-xl font-bold">{{ game.title }}</div>
         </div>
         <div class="text-sm">
           <span class="bg-primary text-gray-50 rounded p-1">{{
-            project.status
+            game.status
           }}</span>
-          {{ project.version }}
+          v{{ game.version }}
         </div>
         <div class="text-secondary flex items-center gap-2">
           <UIcon
             name="i-teenyicons-message-text-alt-outline"
             class="mt-1 icon-feedback"
           />
-          {{
-            props.feedback.filter((f) => f.projectId === project.id).length
-          }}
+          {{ props.feedback.filter((f) => f.projectId === game.id).length }}
           Feedback
         </div>
       </div>

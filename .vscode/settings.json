@@ -7,6 +7,8 @@
     "comments": false
   },
 
+  "editor.tabSize": 2,
+
   "html.suggest.html5": true,
 
   "files.associations": {
