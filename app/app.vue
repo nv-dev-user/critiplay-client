@@ -140,7 +140,7 @@ onMounted(() => {
 
     <UMain class="py-4 px-2">
       <div
-        class="fixed inset-0 -z-10 bg-radial-[circle_at_50%_20%] light:from-purple-300 dark:from-purple-950 light:to-white dark:to-gray-900 to-30%"
+        class="fixed inset-0 -z-10 bg-radial-[circle_at_50%_20%] light:from-purple-300 dark:from-purple-950 light:to-white dark:to-gray-900 to-40%"
       ></div>
       <NuxtPage />
     </UMain>

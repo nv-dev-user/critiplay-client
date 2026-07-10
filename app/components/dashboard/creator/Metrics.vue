@@ -9,8 +9,10 @@ const props = defineProps<{
 
 <template>
   <div class="h-24 grid grid-cols-12 gap-2 mt-4 mx-4">
-    <div class="col-span-3 glass-card metric-card">
-      <div class="bg-violet-500/20 icon-metric-container">
+    <div
+      class="col-span-3 metric-card metric-card--reveal dark:bg-purple-400/50"
+    >
+      <div class="icon-metric-container icon-reveal">
         <UIcon
           name="i-fluent-folder-24-filled"
           class="size-7 absolute icon-projects md:size-10"

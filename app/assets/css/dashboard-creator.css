@@ -42,4 +42,30 @@
             px-2 md:px-0
             h-full;
   }
+
+  /* Carte "Projets" uniquement : verre frosté porté sur ::before pour libérer
+     l'icône du backdrop-filter (sinon bg-fixed de .icon-reveal ne s'aligne pas).
+     La teinte violette reste le fond de la carte. */
+  .metric-card--reveal {
+    @apply isolate overflow-hidden rounded-xl;
+  }
+
+  .metric-card--reveal::before {
+    content: '';
+    @apply absolute inset-0 -z-10 rounded-xl
+            backdrop-blur-md
+            border border-black/10 dark:border-white/10
+            shadow-inner shadow-black/5 dark:shadow-white/10;
+  }
+
+  /* Encoche d'icône = réplique du dégradé de la page fixée au viewport
+     (mêmes tokens que le fond de app.vue → alignement exact). */
+  .icon-reveal {
+    @apply bg-radial-[circle_at_50%_20%]
+            light:from-purple-300 dark:from-purple-950
+            light:to-white dark:to-gray-900 to-40%
+            border border-black/10 dark:border-white/10
+            shadow-inner shadow-black/5 dark:shadow-white/20
+            bg-fixed;
+  }
 }
