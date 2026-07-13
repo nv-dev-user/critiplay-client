@@ -23,6 +23,7 @@
     "@nuxtjs/device": "^4.0.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "date-fns": "^4.4.0",
     "motion-v": "^2.3.0",
     "nuxt": "^4.4.8",
     "prettier": "^3.9.4",

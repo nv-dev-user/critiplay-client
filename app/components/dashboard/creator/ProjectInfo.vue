@@ -22,7 +22,7 @@ const props = defineProps<{
       <!-- Latest Builds -->
       <div class="flex flex-col gap-3">
         <div>Latest Builds:</div>
-        <div class="grid grid-cols-5 gap-3">
+        <div class="grid grid-cols-5">
           <a
             v-if="props.game.windowsBuildLink"
             class="icon-platform-container"

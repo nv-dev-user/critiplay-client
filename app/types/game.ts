@@ -1,18 +1,22 @@
-import type { User } from './user'
-
 export interface Game {
-  // Compulsory data
   id: string
   title: string
+  slug: string
+  description?: string
+  category: string
+  tags: string[]
   status: string
   version: string
-  by: User
+  by: { name?: string }
 
   is_published: boolean
   are_tests_enabled: boolean
   downloadCount: number
 
-  // Optional data
+  buildsUpdatedAt?: string
+  createdAt?: string
+  updatedAt?: string
+
   windowsBuildLink?: string
   macBuildLink?: string
   linuxBuildLink?: string
@@ -22,5 +26,11 @@ export interface Game {
   createdByOrganizationId?: string
 
   // Client-side data
-  focused: boolean
+  focused?: boolean
+}
+
+export enum GameStatus {
+  Alpha = 'Alpha',
+  Beta = 'Beta',
+  Released = 'Released'
 }

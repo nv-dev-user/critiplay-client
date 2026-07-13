@@ -18,9 +18,12 @@ const games: Ref<Game[]> = ref([
   {
     id: '1',
     title: 'Rogue Quest',
+    slug: 'rogue-quest',
     status: 'Alpha',
+    category: 'RPG',
+    tags: ['Adventure', 'Fantasy', 'Indie'],
     by: {
-      username: 'Haulun'
+      name: 'Haulun'
     },
     version: '0.8.1',
     is_published: true,
@@ -28,15 +31,20 @@ const games: Ref<Game[]> = ref([
     downloadCount: 68,
     windowsBuildLink: 'https://example.com/rogue-quest/windows-build.zip',
     androidBuildLink: 'https://example.com/rogue-quest/android-build.apk',
+    createdAt: new Date('2024-06-01T10:00:00Z').toISOString(),
+    updatedAt: new Date('2024-06-01T10:00:00Z').toISOString(),
     focused: true
   },
   {
     id: '2',
     title: 'Pixel Odyssey',
+    slug: 'pixel-odyssey',
     status: 'Alpha',
+    category: 'Platformer',
+    tags: ['Pixel Art', 'Adventure', 'Indie'],
     version: '0.2.4',
     by: {
-      username: 'Unidest'
+      name: 'Unidest'
     },
     is_published: true,
     are_tests_enabled: true,
@@ -46,6 +54,8 @@ const games: Ref<Game[]> = ref([
     linuxBuildLink: 'https://example.com/pixel-odyssey/linux-build.tar.gz',
     macBuildLink: 'https://example.com/pixel-odyssey/macos-build.zip',
     iosBuildLink: 'https://example.com/pixel-odyssey/linux-build.tar.gz',
+    createdAt: new Date('2024-06-01T10:00:00Z').toISOString(),
+    updatedAt: new Date('2024-06-01T10:00:00Z').toISOString(),
     focused: false
   }
 ])
@@ -62,6 +72,7 @@ const feedback: Ref<Feedback[]> = ref([
     status: Status.pending,
     severity: Severity.critical,
     platforms: [Platform.windows, Platform.android],
+    upvotes: 5,
     createdAt: new Date('2024-06-01T10:00:00Z').toISOString(),
     updatedAt: new Date('2024-06-01T10:00:00Z').toISOString()
   },
@@ -74,6 +85,7 @@ const feedback: Ref<Feedback[]> = ref([
     content: 'The main menu buttons overlap on smaller screens.',
     status: Status.in_progress,
     severity: Severity.minor,
+    upvotes: 2,
     platforms: [Platform.windows, Platform.android],
     createdAt: new Date('2024-06-02T14:30:00Z').toISOString(),
     updatedAt: new Date('2024-06-02T15:00:00Z').toISOString()
@@ -88,6 +100,7 @@ const feedback: Ref<Feedback[]> = ref([
       "The game's audio doesn't play on the Linux build. It works fine on Windows and Android.",
     status: Status.closed,
     severity: Severity.major,
+    upvotes: 3,
     platforms: [Platform.linux],
     createdAt: new Date('2024-06-03T09:15:00Z').toISOString(),
     updatedAt: new Date('2024-06-04T11:45:00Z').toISOString()
@@ -114,7 +127,10 @@ const currentFeedbackList = computed(() =>
 )
 const currentUnresolvedFeedbackList = computed(() =>
   currentFeedbackList.value.filter(
-    (f) => f.status !== Status.closed && f.status !== Status.resolved
+    (f) =>
+      f.status !== Status.closed &&
+      f.status !== Status.resolved &&
+      f.projectId === currentProject.value?.id
   )
 )
 const currentTestersCount = computed(
@@ -122,38 +138,62 @@ const currentTestersCount = computed(
     profile_game.value.filter((pg) => pg.gameId === currentProject.value?.id)
       .length
 )
-
-// TODO
-// This computed property will count unique testers who :
-// - have provided one or more feedback
-// - have upvoted one or more feedback
 const currentActiveTestersCount = computed(() => 0)
 </script>
 
 <template>
   <div>
-    <!-- Mobile View -->
-    <DashboardCreatorMetrics
-      :project-count="games.length"
-      :feedback-count="currentUnresolvedFeedbackList.length"
-      :download-count="currentProject?.downloadCount ?? 0"
-      :tester-count="currentActiveTestersCount"
-    />
-
     <div class="mt-4 glass-card p-2 mx-4">
       <DashboardCreatorProjects v-model:games="games" :feedback="feedback" />
     </div>
 
-    <div v-if="currentProject" class="mt-8 glass-card p-2 mx-4">
-      <DashboardCreatorProjectInfo
-        :game="currentProject"
-        :feedback-count="currentFeedbackList.length"
-        :testers-count="currentTestersCount"
+    <div class="mt-8">
+      <DashboardCreatorMetrics
+        :project-count="games.length"
+        :feedback-count="currentUnresolvedFeedbackList.length"
+        :download-count="currentProject?.downloadCount ?? 0"
+        :tester-count="currentActiveTestersCount"
+        class="mt-8"
       />
     </div>
 
-    <div v-if="currentProject" class="mt-4 glass-card p-2 mx-4">
-      <DashboardCreatorFeedbackList :feedback="currentFeedbackList" />
+    <div class="mx-4">
+      <UAccordion
+        v-if="currentProject"
+        :items="[{ currentProject, currentFeedbackList, currentTestersCount }]"
+        class="mt-4 glass-card p-2"
+      >
+        <template #leading>
+          <div class="text-2xl px-2">Information</div>
+        </template>
+
+        <template #body="{ item }">
+          <DashboardCreatorProjectInfo
+            :game="item.currentProject"
+            :feedback-count="item.currentFeedbackList.length"
+            :testers-count="item.currentTestersCount"
+          />
+        </template>
+      </UAccordion>
+    </div>
+
+    <div class="mx-4">
+      <UAccordion
+        v-if="currentProject"
+        class="mt-4 glass-card p-2"
+        :items="[{ currentUnresolvedFeedbackList }]"
+      >
+        <template #leading>
+          <div class="text-2xl px-2">Unresolved Feedback</div>
+        </template>
+
+        <template #body="{ item }">
+          <DashboardCreatorFeedbackList
+            v-model="item.currentUnresolvedFeedbackList"
+            :project-id="currentProject?.id"
+          />
+        </template>
+      </UAccordion>
     </div>
   </div>
 </template>

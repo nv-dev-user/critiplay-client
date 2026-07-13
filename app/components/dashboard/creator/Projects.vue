@@ -48,7 +48,7 @@ const changeCurrentProject = (projectId: string) => {
             <div class="rounded-full w-4 h-4 bg-green-700 mt-1"></div>
             <div class="text-3xl font-bold">{{ split(item.title, 12) }}</div>
           </div>
-          <div class="text-sm text-secondary">par {{ item.by.username }}</div>
+          <div class="text-sm text-secondary">par {{ item.by.name }}</div>
         </div>
       </UCarousel>
     </div>

@@ -10,13 +10,17 @@
 /* secondary: stone */
 
 @theme {
-  --color-primary: theme('colors.purple.600');
+  --color-primary: theme('colors.purple.500');
   --color-secondary: theme('colors.stone.600');
+  --color-card: theme('colors.gray-400');
+  --color-base: theme('colors.gray.900');
 }
 
 .dark {
   --color-primary: theme('colors.purple.400');
   --color-secondary: theme('colors.stone.400');
+  --color-card: theme('colors.gray.700');
+  --color-base: theme('colors.gray.200');
 }
 
 @layer components {
@@ -26,13 +30,5 @@
             backdrop-blur-md
             border border-black/10 dark:border-white/10
             shadow-inner shadow-black/5 dark:shadow-white/10;
-  }
-
-  .glass-card-purple {
-    @apply bg-primary/5
-            rounded-xl
-            backdrop-blur-md
-            border border-primary/20
-            shadow-inner shadow-primary/60;
   }
 }

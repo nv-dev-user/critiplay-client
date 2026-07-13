@@ -40,6 +40,11 @@ const items = ref([
     class: 'text-lg mx-2'
   },
   {
+    label: 'Game Page Example',
+    to: '/game/1',
+    class: 'text-lg mx-2'
+  },
+  {
     label: 'Login',
     to: '/auth/login',
     class: 'text-lg mx-2'
@@ -139,9 +144,6 @@ onMounted(() => {
     </UHeader>
 
     <UMain class="py-4 px-2">
-      <div
-        class="fixed inset-0 -z-10 bg-radial-[circle_at_50%_20%] light:from-purple-300 dark:from-purple-950 light:to-white dark:to-gray-900 to-40%"
-      ></div>
       <NuxtPage />
     </UMain>
 

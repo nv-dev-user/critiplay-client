@@ -7,6 +7,7 @@ export interface Feedback {
   severity: Severity
   platforms: Platform[]
   status: Status
+  upvotes: number
   createdAt: string
   updatedAt: string
 }

@@ -8,23 +8,7 @@ const props = defineProps<{
 </script>
 
 <template>
-  <div class="h-24 grid grid-cols-12 gap-2 mt-4 mx-4">
-    <div
-      class="col-span-3 metric-card metric-card--reveal dark:bg-purple-400/50"
-    >
-      <div class="icon-metric-container icon-reveal">
-        <UIcon
-          name="i-fluent-folder-24-filled"
-          class="size-7 absolute icon-projects md:size-10"
-          fill
-        ></UIcon>
-      </div>
-      <div>
-        <div class="text-2xl font-bold">{{ props.projectCount }}</div>
-        <div class="text-sm hidden md:block">Projects</div>
-      </div>
-    </div>
-
+  <div class="h-24 grid grid-cols-9 gap-2 mt-4 mx-4">
     <div class="col-span-3 glass-card metric-card">
       <div class="bg-rose-700/20 icon-metric-container">
         <UIcon
