@@ -13,7 +13,7 @@ const game: Ref<Game> = ref({
   category: 'RPG',
   tags: ['Adventure', 'Fantasy', 'Indie'],
   by: {
-    name: 'Haulun'
+    name: 'BigProgrammer'
   },
   version: '0.8.1',
   is_published: true,

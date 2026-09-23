@@ -23,7 +23,7 @@ const games: Ref<Game[]> = ref([
     category: 'RPG',
     tags: ['Adventure', 'Fantasy', 'Indie'],
     by: {
-      name: 'Haulun'
+      name: 'BigProgrammer'
     },
     version: '0.8.1',
     is_published: true,
@@ -44,7 +44,7 @@ const games: Ref<Game[]> = ref([
     tags: ['Pixel Art', 'Adventure', 'Indie'],
     version: '0.2.4',
     by: {
-      name: 'Unidest'
+      name: 'LittleProgrammer'
     },
     is_published: true,
     are_tests_enabled: true,

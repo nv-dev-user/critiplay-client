@@ -7,6 +7,8 @@ export interface Game {
   tags: string[]
   status: string
   version: string
+
+  // To change ?
   by: { name?: string }
 
   is_published: boolean

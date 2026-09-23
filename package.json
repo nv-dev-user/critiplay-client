@@ -5,6 +5,7 @@
   "scripts": {
     "build": "nuxt build",
     "dev": "vc dev --listen 3032",
+    "dev2": "nuxt dev --port 3032",
     "preview": "vc deploy",
     "deploy": "vc deploy --prod",
     "postinstall": "nuxt prepare",
